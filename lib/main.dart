@@ -14,3 +14,12 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(debugShowCheckedModeBanner: false, home: HomePage());
   }
 }
+
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
+  }
+}
