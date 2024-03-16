@@ -1,8 +1,9 @@
 import 'dart:convert';
 
 import 'package:get/get.dart';
-import 'package:quran_api/app/model/doa.dart';
 import 'package:http/http.dart' as http;
+
+import '../../../model/sholat.dart';
 
 class JadwalSholatController extends GetxController {
   Future<List<Sholat>> getSholat() async {

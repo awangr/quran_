@@ -7,7 +7,11 @@ class DoaView extends GetView<DoaController> {
     final controller = Get.put(DoaController());
     return Scaffold(
       body: Center(
-        child: ElevatedButton(onPressed: () {}, child: Text('GET API')),
+        child: ElevatedButton(
+            onPressed: () {
+              controller.getDoa();
+            },
+            child: Text('GET API')),
       ),
     );
   }

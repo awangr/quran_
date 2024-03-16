@@ -11,6 +11,7 @@ dependencies:
   dio: ^5.4.1
   simple_circular_progress_bar: 1.0.2
   http: 1.2.1
+  lottie: 3.1.0
   flutter: 
     sdk: flutter
 
@@ -19,5 +20,8 @@ dev_dependencies:
     sdk: flutter
 
 flutter: 
+  assets: 
+    - asset/images/
+    - asset/icons/
   uses-material-design: true
 
