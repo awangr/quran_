@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quran_api/app/modules/home/views/home_view.dart';
-
-import 'app/modules/doa/views/doa_view.dart';
+import 'package:quran_api/app/modules/jadwal_sholat/views/jadwal_sholat_view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: DoaView(),
+      home: JadwalSholatVIew(),
       initialRoute: '/',
     );
   }

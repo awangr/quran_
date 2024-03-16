@@ -21,13 +21,7 @@ class HomeView extends GetView<HomeController> {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return Column(
                     children: [
-                      Center(
-                        child: // Example 16
-                            SimpleCircularProgressBar(
-                          mergeMode: true,
-                          animationDuration: 1,
-                        ),
-                      ),
+                      Center(child: CircularProgressIndicator()),
                     ],
                   );
                 } else if (snapshot.hasData) {
