@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quran_api/app/model/all_surah.dart';
-import 'package:quran_api/app/model/detail_surah.dart' as detailSurah;
+import 'package:quran_api/app/model/detail_surah.dart';
 import 'package:quran_api/app/modules/detail/controllers/detail_controller.dart';
 
 class DetailView extends GetView<DetailController> {
@@ -11,11 +11,13 @@ class DetailView extends GetView<DetailController> {
     final AllSurah? surah = Get.arguments;
     return Scaffold(
         appBar: AppBar(title: Text('${surah?.name ?? 'NULL'}')),
-        body: FutureBuilder<detailSurah.DetailSurah>(
+        body: FutureBuilder<DetailSurah>(
           future: controller.getDetailSurah(surah?.number.toString() ?? 'NULL'),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(child: CircularProgressIndicator());
+              return Center(
+                  child: CircularProgressIndicator(
+                      backgroundColor: Colors.teal, color: Colors.pink));
             } else if (snapshot.hasData) {
               return ListView.builder(
                 itemCount: snapshot.data?.ayahs?.length,
@@ -24,12 +26,12 @@ class DetailView extends GetView<DetailController> {
                     return SizedBox();
                   }
                   //ini untuk mengambil data dari ayat
-                  detailSurah.Ayahs? ayahs = snapshot.data!.ayahs![index];
+                  Ayahs? ayahs = snapshot.data!.ayahs![index];
                   return Column(
                     children: [
-                      Text(ayahs.arab ?? ''),
+                      Text(ayahs.arab ?? 'null'),
                       SizedBox(height: 10),
-                      Text(ayahs.translation ?? ''),
+                      Text(ayahs.translation ?? 'null'),
                     ],
                   );
                 },

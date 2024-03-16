@@ -12,7 +12,7 @@ class DetailController extends GetxController {
     } else {
       print('Controller tidak terdispose');
     }
-    //Api ini berbentuk sebuah map
+    //Api ini berbentuk sebuah map {}
     Uri url = Uri.parse('https://quran-api-id.vercel.app/surahs/$nomor');
     var res = await http.get(url);
     Map<String, dynamic> data = jsonDecode(res.body);

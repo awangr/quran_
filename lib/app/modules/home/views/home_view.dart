@@ -19,12 +19,16 @@ class HomeView extends GetView<HomeController> {
               future: controller.getAllSurah(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(
-                    child: // Example 16
-                        SimpleCircularProgressBar(
-                      mergeMode: true,
-                      animationDuration: 1,
-                    ),
+                  return Column(
+                    children: [
+                      Center(
+                        child: // Example 16
+                            SimpleCircularProgressBar(
+                          mergeMode: true,
+                          animationDuration: 1,
+                        ),
+                      ),
+                    ],
                   );
                 } else if (snapshot.hasData) {
                   return ListView.builder(
@@ -51,7 +55,7 @@ class HomeView extends GetView<HomeController> {
                   throw Exception('ERRORR');
                 }
               },
-            )
+            ),
           ],
         ),
       ),

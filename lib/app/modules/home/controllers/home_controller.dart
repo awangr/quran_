@@ -10,10 +10,11 @@ class HomeController extends GetxController {
     } else {
       print('Controller tidak terdispose');
     }
-    //Api ini berbentuk sebuah List
+    //Api ini berbentuk sebuah List []
     Uri url = Uri.parse('https://quran-api-id.vercel.app/surahs');
     var response = await http.get(url);
     List? data = json.decode(response.body);
+    print(data);
     if (data == null || data.isEmpty) {
       return [];
     } else {
