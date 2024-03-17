@@ -4,10 +4,10 @@ import 'package:get/get.dart';
 import 'package:quran_api/app/model/detail_surah.dart';
 import 'package:http/http.dart' as http;
 
-class DetailController extends GetxController {
+class DetailQuranController extends GetxController {
   Future<DetailSurah> getDetailSurah(String? nomor) async {
     //INI berfungsi untuk mencari tahu bahwa controller kita terdispose atau tidak
-    if (Get.isRegistered<DetailController>()) {
+    if (Get.isRegistered<DetailQuranController>()) {
       print('Controller  terdispose');
     } else {
       print('Controller tidak terdispose');

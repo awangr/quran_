@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:quran_api/app/modules/home/views/home_view.dart';
+import 'package:quran_api/app/modules/home_quran/views/home_quran_view.dart';
 import 'package:quran_api/app/modules/jadwal_sholat/views/jadwal_sholat_view.dart';
-import 'package:quran_api/app/modules/menu_awal/views/menu_view.dart';
+import 'package:quran_api/app/modules/home/views/home_view.dart';
 
 import 'app/modules/doa/views/doa_view.dart';
 
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: MenuView(),
+      home: HomeView(),
       initialRoute: '/',
     );
   }

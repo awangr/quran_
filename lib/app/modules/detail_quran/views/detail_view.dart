@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quran_api/app/model/all_surah.dart';
 import 'package:quran_api/app/model/detail_surah.dart';
-import 'package:quran_api/app/modules/detail/controllers/detail_controller.dart';
+import 'package:quran_api/app/modules/detail_quran/controllers/detail_controller.dart';
 
-class DetailView extends GetView<DetailController> {
-  final controller = Get.put(DetailController());
+class DetailView extends GetView<DetailQuranController> {
+  final controller = Get.put(DetailQuranController());
 
   Widget build(BuildContext context) {
     final AllSurah? surah = Get.arguments;
