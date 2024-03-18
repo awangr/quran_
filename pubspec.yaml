@@ -12,6 +12,7 @@ dependencies:
   simple_circular_progress_bar: 1.0.2
   http: 1.2.1
   lottie: 3.1.0
+  just_audio: 0.9.36
   flutter: 
     sdk: flutter
 
