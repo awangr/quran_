@@ -25,6 +25,7 @@ class HomeQuranView extends GetView<HomeQuranController> {
                   );
                 } else if (snapshot.hasData) {
                   return ListView.builder(
+                    physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemCount: snapshot.data!.length,
                     itemBuilder: (context, index) {
@@ -43,8 +44,8 @@ class HomeQuranView extends GetView<HomeQuranController> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Container(
-                                      width: 30,
-                                      height: 30,
+                                      width: 45,
+                                      height: 45,
                                       child: Center(
                                           child: Text('${surah.number}')),
                                       decoration: BoxDecoration(
