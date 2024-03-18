@@ -14,7 +14,6 @@ class JadwalSholatController extends GetxController {
     if (data == null || data.isEmpty) {
       return [];
     } else {
-      print(data);
       return data.map((e) => Sholat.fromJson(e)).toList();
     }
   }

@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:quran_api/app/modules/doa/views/doa_view.dart';
 import 'package:quran_api/app/modules/home/controllers/home_controller.dart';
 import 'package:quran_api/app/modules/home_quran/views/home_quran_view.dart';
+import 'package:quran_api/app/modules/jadwal_sholat/views/jadwal_sholat_view.dart';
+import 'package:quran_api/app/modules/murotal/views/murotal_view.dart';
 
 class HomeView extends GetView<HomeController> {
   Widget build(BuildContext context) {
@@ -135,11 +137,14 @@ class Menu {
     Menu('asset/images/qoroa.png', 'Quran', Colors.teal.shade400, () {
       Get.to(HomeQuranView());
     }),
-    Menu('asset/images/headphone.png', 'Murotal', Colors.amber.shade400, () {}),
+    Menu('asset/images/headphone.png', 'Murotal', Colors.amber.shade400, () {
+      Get.to(MurotalView());
+    }),
     Menu('asset/images/doa.png', 'Doa-Doa', Colors.blue.shade400, () {
       Get.to(DoaView());
     }),
-    Menu(
-        'asset/images/adzan.png', 'Jadwal Sholat', Colors.cyan.shade400, () {}),
+    Menu('asset/images/adzan.png', 'Jadwal Sholat', Colors.cyan.shade400, () {
+      Get.to(JadwalSholatVIew());
+    }),
   ];
 }
