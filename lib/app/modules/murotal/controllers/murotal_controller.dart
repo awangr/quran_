@@ -7,6 +7,8 @@ import '../../../model/all_surah.dart';
 import '../../home_quran/controllers/home_quran_controller.dart';
 
 class MurotalController extends GetxController {
+  final player = AudioPlayer();
+  RxString audition = 'stop'.obs;
   Future<List<AllSurah>> getAllSurah() async {
     if (Get.isRegistered<HomeQuranController>()) {
       print('Controller  terdispose');
@@ -26,13 +28,16 @@ class MurotalController extends GetxController {
     }
   }
 
-  final player = AudioPlayer();
   void playSurah(String? url) async {
     if (url != null) {
       // Catching errors at load time
       try {
+        await player.stop();
         await player.setUrl(url);
+        audition.value = 'play';
         await player.play();
+        audition.value = 'stop';
+        await player.stop();
       } on PlayerException catch (e) {
         Get.defaultDialog(
             title: 'Terjadi Kesalahan', middleText: '${e.message.toString()}');
@@ -47,6 +52,59 @@ class MurotalController extends GetxController {
     }
   }
 
+  void resumeSurah() async {
+    try {
+      audition.value = 'play';
+      await player.play();
+      audition.value = 'stop';
+    } on PlayerException catch (e) {
+      Get.defaultDialog(
+          title: 'Terjadi Kesalahan', middleText: '${e.message.toString()}');
+    } on PlayerInterruptedException catch (e) {
+      Get.defaultDialog(
+          title: 'Terjadi Kesalahan',
+          middleText: 'Connection aborted: ${e.message}');
+    } catch (e) {
+      Get.defaultDialog(
+          title: 'Terjadi Kesalahan', middleText: 'An error occured: $e');
+    }
+  }
+
+  void pauseSurah() async {
+    try {
+      await player.pause();
+      audition.value = 'pause';
+    } on PlayerException catch (e) {
+      Get.defaultDialog(
+          title: 'Terjadi Kesalahan', middleText: '${e.message.toString()}');
+    } on PlayerInterruptedException catch (e) {
+      Get.defaultDialog(
+          title: 'Terjadi Kesalahan',
+          middleText: 'Connection aborted: ${e.message}');
+    } catch (e) {
+      Get.defaultDialog(
+          title: 'Terjadi Kesalahan', middleText: 'An error occured: $e');
+    }
+  }
+
+  void stopSurah() async {
+    try {
+      await player.stop();
+      audition.value = 'stop';
+    } on PlayerException catch (e) {
+      Get.defaultDialog(
+          title: 'Terjadi Kesalahan', middleText: '${e.message.toString()}');
+    } on PlayerInterruptedException catch (e) {
+      Get.defaultDialog(
+          title: 'Terjadi Kesalahan',
+          middleText: 'Connection aborted: ${e.message}');
+    } catch (e) {
+      Get.defaultDialog(
+          title: 'Terjadi Kesalahan', middleText: 'An error occured: $e');
+    }
+  }
+
+  /// Ini cara agar player terdispose dan stop pada saat button back
   @override
   void onClose() {
     player.stop();
