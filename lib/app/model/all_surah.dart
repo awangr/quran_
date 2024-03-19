@@ -6,7 +6,7 @@ class AllSurah {
   String? revelation;
   String? description;
   String? audio;
-  String? condition;
+  String? condition = 'stop';
 
   AllSurah(
       {this.number,
@@ -16,7 +16,7 @@ class AllSurah {
       this.revelation,
       this.description,
       this.audio,
-      this.condition = 'stop'});
+      this.condition});
 
   AllSurah.fromJson(Map<String, dynamic> json) {
     number = json['number'];
@@ -37,7 +37,18 @@ class AllSurah {
     data['revelation'] = this.revelation;
     data['description'] = this.description;
     data['audio'] = this.audio;
-    data['condition'] = this.condition;
+    data['condition'] = condition;
     return data;
   }
+
+  // Map<String, dynamic> toJson() => {
+  //       'number': number,
+  //       'numberOfAyahs': numberOfAyahs,
+  //       'name': name,
+  //       'translation': translation,
+  //       'revelation': revelation,
+  //       'description': description,
+  //       'audio': audio,
+  //       'condition': condition
+  //     };
 }

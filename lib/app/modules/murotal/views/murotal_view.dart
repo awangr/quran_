@@ -23,8 +23,101 @@ class MurotalView extends GetView<MurotalController> {
                     itemCount: snapshot.data?.length,
                     itemBuilder: (context, index) {
                       AllSurah? surah = snapshot.data?[index] ?? null;
+                      // print('${surah?.condition}');
                       return Column(
-                        children: [],
+                        children: [
+                          Container(
+                            margin: EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              color: Colors.grey.shade200,
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            width: Get.width,
+                            height: 60,
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 10),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Container(
+                                        width: 42,
+                                        height: 42,
+                                        child: Center(
+                                            child: Text(
+                                          '${surah?.number ?? 'null'}',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold),
+                                        )),
+                                        decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                          image: AssetImage(
+                                              'asset/icons/octa.png'),
+                                        )),
+                                      ),
+                                      SizedBox(width: 15),
+                                      Text('${surah?.name}')
+                                    ],
+                                  ),
+                                  GetBuilder<MurotalController>(builder: (c) {
+                                    return (surah!.condition == 'stop')
+                                        ? IconButton(
+                                            onPressed: () {
+                                              //kemudian diplay
+                                              controller.playSurah(surah);
+                                            },
+                                            icon: Icon(Icons.play_arrow))
+                                        : IconButton(
+                                            onPressed: () {
+                                              //kemudian diplay
+                                              controller.stopSurah(surah);
+                                            },
+                                            icon: Icon(Icons.stop));
+                                    // return (surah?.condition == 'stop')
+                                    //     ? IconButton(
+                                    //         onPressed: () {
+                                    //           //kemudian diplay
+                                    //           controller.playSurah(surah);
+                                    //         },
+                                    //         icon: Icon(Icons.play_arrow))
+                                    //     //kalau icon play diatas di klik muncul Row beserta 2 icon dibawah ini
+                                    //     //yang memiliki 2 kondisi
+                                    //     : Row(
+                                    //         mainAxisSize: MainAxisSize.min,
+                                    //         children: [
+                                    //           //kalau audition masih dalam play itu memunculkan 2 icon dibawah beserta fungsinya
+                                    //           (surah!.condition == 'play')
+                                    //               ? IconButton(
+                                    //                   onPressed: () {
+                                    //                     //pause ketika di klik muncul icon play arrow
+                                    //                     controller
+                                    //                         .pauseSurah(surah);
+                                    //                   },
+                                    //                   icon: Icon(Icons.pause))
+                                    //               : IconButton(
+                                    //                   onPressed: () {
+                                    //                     controller
+                                    //                         .resumeSurah(surah);
+                                    //                   },
+                                    //                   icon: Icon(Icons
+                                    //                       .play_arrow_outlined)),
+                                    //           IconButton(
+                                    //               onPressed: () {
+                                    //                 //kalau ini di klik akan stop sekaligus mereset surah yang diplay tadi
+                                    //                 controller.stopSurah(surah);
+                                    //               },
+                                    //               icon: Icon(Icons.stop))
+                                    //         ],
+                                    //       );
+                                  })
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
                       );
                       // return ListTile(
                       //   //kalau audition stop itu default icon nya adalah play fungsi awalnya adalah stop

@@ -1,5 +1,5 @@
 import 'dart:convert';
-
+import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:just_audio/just_audio.dart';
@@ -7,8 +7,6 @@ import '../../../model/all_surah.dart';
 import '../../home_quran/controllers/home_quran_controller.dart';
 
 class MurotalController extends GetxController {
-  final player = AudioPlayer();
-  RxString audition = 'stop'.obs;
   Future<List<AllSurah>> getAllSurah() async {
     if (Get.isRegistered<HomeQuranController>()) {
       print('Controller  terdispose');
@@ -28,16 +26,23 @@ class MurotalController extends GetxController {
     }
   }
 
-  void playSurah(String? url) async {
-    if (url != null) {
+  final player = AudioPlayer();
+  void playSurah(AllSurah? surah) async {
+    if (surah?.audio != null) {
       // Catching errors at load time
       try {
-        await player.stop();
-        await player.setUrl(url);
-        audition.value = 'play';
+        // await player.stop();
+        surah!.condition = 'play';
+        print(surah.condition);
+
+        await player.setUrl(surah.audio!);
+
         await player.play();
-        audition.value = 'stop';
+        print(surah.condition);
+        refresh();
+        surah.condition = 'stop';
         await player.stop();
+        refresh();
       } on PlayerException catch (e) {
         Get.defaultDialog(
             title: 'Terjadi Kesalahan', middleText: '${e.message.toString()}');
@@ -52,11 +57,13 @@ class MurotalController extends GetxController {
     }
   }
 
-  void resumeSurah() async {
+  void resumeSurah(AllSurah? surah) async {
     try {
-      audition.value = 'play';
+      surah?.condition = 'play';
       await player.play();
-      audition.value = 'stop';
+      refresh();
+      surah?.condition = 'stop';
+      refresh();
     } on PlayerException catch (e) {
       Get.defaultDialog(
           title: 'Terjadi Kesalahan', middleText: '${e.message.toString()}');
@@ -70,10 +77,11 @@ class MurotalController extends GetxController {
     }
   }
 
-  void pauseSurah() async {
+  void pauseSurah(AllSurah surah) async {
     try {
       await player.pause();
-      audition.value = 'pause';
+      surah.condition = 'pause';
+      refresh();
     } on PlayerException catch (e) {
       Get.defaultDialog(
           title: 'Terjadi Kesalahan', middleText: '${e.message.toString()}');
@@ -87,10 +95,11 @@ class MurotalController extends GetxController {
     }
   }
 
-  void stopSurah() async {
+  void stopSurah(AllSurah surah) async {
     try {
       await player.stop();
-      audition.value = 'stop';
+      surah.condition = 'stop';
+      refresh();
     } on PlayerException catch (e) {
       Get.defaultDialog(
           title: 'Terjadi Kesalahan', middleText: '${e.message.toString()}');
