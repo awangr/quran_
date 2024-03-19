@@ -23,44 +23,47 @@ class MurotalView extends GetView<MurotalController> {
                     itemCount: snapshot.data?.length,
                     itemBuilder: (context, index) {
                       AllSurah? surah = snapshot.data?[index] ?? null;
-                      return ListTile(
-                        //kalau audition stop itu default icon nya adalah play fungsi awalnya adalah stop
-                        trailing: Obx(() => (controller.audition == 'stop')
-                            ? IconButton(
-                                onPressed: () {
-                                  //kemudian diplay
-                                  controller.playSurah(surah?.audio);
-                                },
-                                icon: Icon(Icons.play_arrow))
-                            //kalau icon play diatas di klik muncul Row beserta 2 icon dibawah ini
-                            //yang memiliki 2 kondisi
-                            : Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  //kalau audition masih dalam play itu memunculkan 2 icon dibawah beserta fungsinya
-                                  (controller.audition == 'play')
-                                      ? IconButton(
-                                          onPressed: () {
-                                            //pause ketika di klik muncul icon play arrow
-                                            controller.pauseSurah();
-                                          },
-                                          icon: Icon(Icons.pause))
-                                      : IconButton(
-                                          onPressed: () {
-                                            controller.resumeSurah();
-                                          },
-                                          icon:
-                                              Icon(Icons.play_arrow_outlined)),
-                                  IconButton(
-                                      onPressed: () {
-                                        //kalau ini di klik akan stop sekaligus mereset surah yang diplay tadi
-                                        controller.stopSurah();
-                                      },
-                                      icon: Icon(Icons.stop))
-                                ],
-                              )),
-                        title: Text('${surah?.name}'),
+                      return Column(
+                        children: [],
                       );
+                      // return ListTile(
+                      //   //kalau audition stop itu default icon nya adalah play fungsi awalnya adalah stop
+                      //   trailing: Obx(() => (controller.audition == 'stop')
+                      //       ? IconButton(
+                      //           onPressed: () {
+                      //             //kemudian diplay
+                      //             controller.playSurah(surah?.audio);
+                      //           },
+                      //           icon: Icon(Icons.play_arrow))
+                      //       //kalau icon play diatas di klik muncul Row beserta 2 icon dibawah ini
+                      //       //yang memiliki 2 kondisi
+                      //       : Row(
+                      //           mainAxisSize: MainAxisSize.min,
+                      //           children: [
+                      //             //kalau audition masih dalam play itu memunculkan 2 icon dibawah beserta fungsinya
+                      //             (controller.audition == 'play')
+                      //                 ? IconButton(
+                      //                     onPressed: () {
+                      //                       //pause ketika di klik muncul icon play arrow
+                      //                       controller.pauseSurah();
+                      //                     },
+                      //                     icon: Icon(Icons.pause))
+                      //                 : IconButton(
+                      //                     onPressed: () {
+                      //                       controller.resumeSurah();
+                      //                     },
+                      //                     icon:
+                      //                         Icon(Icons.play_arrow_outlined)),
+                      //             IconButton(
+                      //                 onPressed: () {
+                      //                   //kalau ini di klik akan stop sekaligus mereset surah yang diplay tadi
+                      //                   controller.stopSurah();
+                      //                 },
+                      //                 icon: Icon(Icons.stop))
+                      //           ],
+                      //         )),
+                      //   title: Text('${surah?.name}'),
+                      // );
                     },
                   );
                 } else {
