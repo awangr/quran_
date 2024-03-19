@@ -27,12 +27,50 @@ class DetailView extends GetView<DetailQuranController> {
                   }
                   //ini untuk mengambil data dari ayat
                   Ayahs? ayahs = snapshot.data!.ayahs![index];
-                  return Column(
-                    children: [
-                      Text(ayahs.arab ?? 'null'),
-                      SizedBox(height: 10),
-                      Text(ayahs.translation ?? 'null'),
-                    ],
+                  return Container(
+                    margin: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Container(
+                          width: Get.width,
+                          height: 50,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Container(
+                                  child: Center(
+                                      child: Text('${ayahs.number?.inSurah}')),
+                                  width: 50,
+                                  height: 50,
+                                  decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                          image: AssetImage(
+                                              'asset/icons/octa.png')))),
+                            ],
+                          ),
+                          decoration: BoxDecoration(
+                              color: Colors.grey.shade200,
+                              borderRadius: BorderRadius.circular(15)),
+                        ),
+                        Text(
+                          ayahs.arab ?? 'null',
+                          textAlign: TextAlign.end,
+                          style: TextStyle(fontSize: 20),
+                        ),
+                        SizedBox(height: 10),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Flexible(
+                              child: Text(ayahs.translation ?? 'null',
+                                  style:
+                                      TextStyle(fontStyle: FontStyle.italic)),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   );
                 },
               );

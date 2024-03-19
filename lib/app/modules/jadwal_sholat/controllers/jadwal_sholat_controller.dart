@@ -11,6 +11,7 @@ class JadwalSholatController extends GetxController {
         'https://raw.githubusercontent.com/lakuapik/jadwalsholatorg/master/adzan/semarang/2019/12.json');
     var res = await http.get(url);
     List? data = json.decode(res.body);
+    print(data?[0]);
     if (data == null || data.isEmpty) {
       return [];
     } else {

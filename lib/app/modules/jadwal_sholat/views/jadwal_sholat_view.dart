@@ -7,7 +7,9 @@ class JadwalSholatVIew extends GetView<JadwalSholatController> {
   final controller = Get.put(JadwalSholatController());
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(),
+        appBar: AppBar(
+          title: Text('Jadwal Sholat'),
+        ),
         body: SingleChildScrollView(
           child: Column(
             children: [
@@ -23,9 +25,12 @@ class JadwalSholatVIew extends GetView<JadwalSholatController> {
                       shrinkWrap: true,
                       itemBuilder: (context, index) {
                         Sholat? sholat = snapshot.data?[index] ?? null;
-                        return ListTile(
-                          title: Text('${sholat?.tanggal ?? 'Error'}'),
-                        );
+                        return Column(children: [
+                          Card(),
+                          Row(
+                            children: [Text('${sholat!.shubuh}')],
+                          )
+                        ]);
                       },
                     );
                   } else {
