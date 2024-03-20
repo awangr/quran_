@@ -1,14 +1,12 @@
 import 'dart:convert';
-import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:just_audio/just_audio.dart';
 import '../../../model/all_surah.dart';
-import '../../home_quran/controllers/home_quran_controller.dart';
 
 class MurotalController extends GetxController {
   Future<List<AllSurah>> getAllSurah() async {
-    if (Get.isRegistered<HomeQuranController>()) {
+    if (Get.isRegistered<MurotalController>()) {
       print('Controller  terdispose');
     } else {
       print('Controller tidak terdispose');
@@ -34,15 +32,13 @@ class MurotalController extends GetxController {
         // await player.stop();
         surah!.condition = 'play';
         print(surah.condition);
-
         await player.setUrl(surah.audio!);
-
         await player.play();
         print(surah.condition);
-        refresh();
+        update();
         surah.condition = 'stop';
         await player.stop();
-        refresh();
+        update();
       } on PlayerException catch (e) {
         Get.defaultDialog(
             title: 'Terjadi Kesalahan', middleText: '${e.message.toString()}');
@@ -61,9 +57,9 @@ class MurotalController extends GetxController {
     try {
       surah?.condition = 'play';
       await player.play();
-      refresh();
+      update();
       surah?.condition = 'stop';
-      refresh();
+      update();
     } on PlayerException catch (e) {
       Get.defaultDialog(
           title: 'Terjadi Kesalahan', middleText: '${e.message.toString()}');
@@ -81,7 +77,7 @@ class MurotalController extends GetxController {
     try {
       await player.pause();
       surah.condition = 'pause';
-      refresh();
+      update();
     } on PlayerException catch (e) {
       Get.defaultDialog(
           title: 'Terjadi Kesalahan', middleText: '${e.message.toString()}');
@@ -99,7 +95,7 @@ class MurotalController extends GetxController {
     try {
       await player.stop();
       surah.condition = 'stop';
-      refresh();
+      update();
     } on PlayerException catch (e) {
       Get.defaultDialog(
           title: 'Terjadi Kesalahan', middleText: '${e.message.toString()}');

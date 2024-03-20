@@ -32,26 +32,60 @@ class DetailView extends GetView<DetailQuranController> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        Container(
-                          width: Get.width,
-                          height: 50,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Container(
-                                  child: Center(
-                                      child: Text('${ayahs.number?.inSurah}')),
-                                  width: 50,
-                                  height: 50,
-                                  decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                          image: AssetImage(
-                                              'asset/icons/octa.png')))),
-                            ],
+                        InkWell(
+                          onTap: () {
+                            Get.defaultDialog(
+                                title:
+                                    'Ayat Ke ${ayahs.number?.inSurah ?? 'null'}',
+                                content: Container(
+                                  margin: EdgeInsets.symmetric(
+                                      horizontal: 15, vertical: 9),
+                                  child: Text(
+                                      '${ayahs.tafsir?.kemenag?.short ?? 'null'}',
+                                      textAlign: TextAlign.left),
+                                ));
+                          },
+                          child: Container(
+                            width: Get.width,
+                            height: 50,
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 8),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Container(
+                                      child: Center(
+                                          child:
+                                              Text('${ayahs.number?.inSurah}')),
+                                      width: 50,
+                                      height: 50,
+                                      decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                              image: AssetImage(
+                                                  'asset/icons/octa.png')))),
+                                  TextButton(
+                                      onPressed: () {
+                                        Get.defaultDialog(
+                                            title:
+                                                'Ayat Ke ${ayahs.number?.inSurah ?? 'null'}',
+                                            content: Container(
+                                              margin: EdgeInsets.symmetric(
+                                                  horizontal: 15, vertical: 9),
+                                              child: Text(
+                                                  '${ayahs.tafsir?.kemenag?.short ?? 'null'}',
+                                                  textAlign: TextAlign.left),
+                                            ));
+                                      },
+                                      child: Text('Tafsir...'))
+                                ],
+                              ),
+                            ),
+                            decoration: BoxDecoration(
+                                color: Colors.grey.shade200,
+                                borderRadius: BorderRadius.circular(15)),
                           ),
-                          decoration: BoxDecoration(
-                              color: Colors.grey.shade200,
-                              borderRadius: BorderRadius.circular(15)),
                         ),
                         Text(
                           ayahs.arab ?? 'null',

@@ -62,57 +62,33 @@ class MurotalView extends GetView<MurotalController> {
                                       Text('${surah?.name}')
                                     ],
                                   ),
-                                  GetBuilder<MurotalController>(builder: (c) {
-                                    return (surah!.condition == 'stop')
-                                        ? IconButton(
-                                            onPressed: () {
-                                              //kemudian diplay
-                                              controller.playSurah(surah);
-                                            },
-                                            icon: Icon(Icons.play_arrow))
-                                        : IconButton(
-                                            onPressed: () {
-                                              //kemudian diplay
-                                              controller.stopSurah(surah);
-                                            },
-                                            icon: Icon(Icons.stop));
-                                    // return (surah?.condition == 'stop')
-                                    //     ? IconButton(
-                                    //         onPressed: () {
-                                    //           //kemudian diplay
-                                    //           controller.playSurah(surah);
-                                    //         },
-                                    //         icon: Icon(Icons.play_arrow))
-                                    //     //kalau icon play diatas di klik muncul Row beserta 2 icon dibawah ini
-                                    //     //yang memiliki 2 kondisi
-                                    //     : Row(
-                                    //         mainAxisSize: MainAxisSize.min,
-                                    //         children: [
-                                    //           //kalau audition masih dalam play itu memunculkan 2 icon dibawah beserta fungsinya
-                                    //           (surah!.condition == 'play')
-                                    //               ? IconButton(
-                                    //                   onPressed: () {
-                                    //                     //pause ketika di klik muncul icon play arrow
-                                    //                     controller
-                                    //                         .pauseSurah(surah);
-                                    //                   },
-                                    //                   icon: Icon(Icons.pause))
-                                    //               : IconButton(
-                                    //                   onPressed: () {
-                                    //                     controller
-                                    //                         .resumeSurah(surah);
-                                    //                   },
-                                    //                   icon: Icon(Icons
-                                    //                       .play_arrow_outlined)),
-                                    //           IconButton(
-                                    //               onPressed: () {
-                                    //                 //kalau ini di klik akan stop sekaligus mereset surah yang diplay tadi
-                                    //                 controller.stopSurah(surah);
-                                    //               },
-                                    //               icon: Icon(Icons.stop))
-                                    //         ],
-                                    //       );
-                                  })
+                                  GetBuilder<MurotalController>(
+                                      init: MurotalController(),
+                                      builder: (MurotalController c) {
+                                        return (surah!.condition == 'stop')
+                                            ? TextButton(
+                                                onPressed: () {
+                                                  controller.playSurah(surah);
+                                                },
+                                                child: Text('PLAY'))
+                                            : TextButton(
+                                                onPressed: () {
+                                                  controller.stopSurah(surah);
+                                                },
+                                                child: Text('STOP'));
+                                        // ? IconButton(
+                                        //     onPressed: () {
+                                        //       //kemudian diplay
+                                        //       controller.playSurah(surah);
+                                        //     },
+                                        //     icon: Icon(Icons.play_arrow))
+                                        // : IconButton(
+                                        //     onPressed: () {
+                                        //       //kemudian diplay
+                                        //       controller.stopSurah(surah);
+                                        //     },
+                                        //     icon: Icon(Icons.stop));
+                                      })
                                 ],
                               ),
                             ),
