@@ -5,15 +5,55 @@ import 'package:quran_api/app/modules/home/controllers/home_controller.dart';
 import 'package:quran_api/app/modules/home_quran/views/home_quran_view.dart';
 import 'package:quran_api/app/modules/jadwal_sholat/views/jadwal_sholat_view.dart';
 import 'package:quran_api/app/modules/murotal/views/murotal_view.dart';
+import 'package:quran_api/app/widget_model/home_drawer_model.dart';
+
+import '../../../widget_model/home_menu_model.dart';
 
 class HomeView extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Drawer(
+        child: Column(
+          children: [
+            DrawerHeader(
+                child: Container(
+              width: 200,
+              height: 200,
+              decoration: BoxDecoration(
+                  color: Colors.amber,
+                  shape: BoxShape.circle,
+                  image: DecorationImage(
+                      image: AssetImage('asset/images/quran.png'),
+                      fit: BoxFit.cover)),
+            )),
+            SizedBox(height: 40),
+            ListView.builder(
+              itemCount: DrawerTile.listDrawer.length,
+              itemBuilder: (context, index) {},
+            ),
+            ListTile(
+              title: Text('Home'),
+              leading: Icon(Icons.home),
+            ),
+            ListTile(
+              title: Text('Home'),
+              leading: Icon(Icons.home),
+            ),
+            ListTile(
+              title: Text('Home'),
+              leading: Icon(Icons.home),
+            ),
+            ListTile(
+              title: Text('Home'),
+              leading: Icon(Icons.home),
+            ),
+          ],
+        ),
+      ),
       appBar: AppBar(
         actions: [
           IconButton(onPressed: () {}, icon: Icon(Icons.search_rounded))
         ],
-        leading: IconButton(onPressed: () {}, icon: Icon(Icons.menu_rounded)),
         centerTitle: true,
         title: Text(
           'القرآن',
@@ -125,26 +165,4 @@ class HomeView extends GetView<HomeController> {
       ),
     );
   }
-}
-
-class Menu {
-  String image;
-  String text;
-  Color color;
-  Function()? onTap;
-  Menu(this.image, this.text, this.color, this.onTap);
-  static List<Menu> listMenu = [
-    Menu('asset/images/qoroa.png', 'Quran', Colors.teal.shade400, () {
-      Get.to(HomeQuranView());
-    }),
-    Menu('asset/images/headphone.png', 'Murotal', Colors.amber.shade400, () {
-      Get.to(MurotalView());
-    }),
-    Menu('asset/images/doa.png', 'Doa-Doa', Colors.blue.shade400, () {
-      Get.to(DoaView());
-    }),
-    Menu('asset/images/adzan.png', 'Jadwal Sholat', Colors.cyan.shade400, () {
-      Get.to(JadwalSholatVIew());
-    }),
-  ];
 }
